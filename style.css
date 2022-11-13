@@ -1,0 +1,625 @@
+:root {
+  /* =====DARK MODE COLORS====== */
+  /* Elements */
+  --dm-clr-dark-blue: hsl(209, 23%, 22%);
+  /* Background */
+  --dm-clr-very-dark-blue: hsl(207, 26%, 17%);
+  /* Text */
+  --dm-clr-white: hsl(0, 0%, 100%);
+  /* Shadow */
+  --dm-box-shadow: hsl(210, 26%, 12%, 0.1);
+  /* top-btn */
+  --dm-top-btn: hsl(207, 30%, 15%);
+
+  /* =====LIGHT MODE COLORS====== */
+  /* Elements */
+  --lm-clr-white: hsl(0, 0%, 100%);
+  /* Background */
+  --lm-clr-very-light-gray: hsl(0, 0%, 98%);
+  /* Text */
+  --lm-clr-very-dark-blue: hsl(200, 15%, 8%);
+  /* Shadow */
+  --lm-box-shadow: hsla(0, 3%, 79%, 0.1);
+  /* top-btn */
+  --lm-top-btn: hsl(0, 0%, 90%);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  color: var(--dm-clr-white);
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: repeat(3, max-content);
+  grid-template-columns: 1fr minmax(360px, 767px) 1fr;
+  grid-template-areas:
+    "alias-header alias-header alias-header"
+    ". alias-country-list-nav ."
+    ". alias-country-list-section alias-top-btn-container";
+  background-color: var(--dm-clr-very-dark-blue);
+}
+
+#country-selected,
+#back-btn {
+  display: none;
+}
+
+.clicked-country-active #country-list-nav,
+.clicked-country-active #country-list {
+  display: none;
+}
+
+/* =============================================
+                      HEADER
+============================================= */
+
+header {
+  grid-area: alias-header;
+  display: grid;
+  grid-template-columns: 1fr minmax(360px, 767px) 1fr;
+  grid-template-areas: ". alias-header-content .";
+  background-color: var(--dm-clr-dark-blue);
+  box-shadow: 0px 5px 0px 0px var(--dm-box-shadow);
+}
+
+.header-content {
+  grid-area: alias-header-content;
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 1rem;
+}
+
+.header-content h1 {
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+body .fa-regular.fa-moon {
+  display: none;
+}
+
+.light-mode .fa-solid.fa-moon {
+  display: none;
+}
+
+.light-mode .fa-regular.fa-moon {
+  display: flex;
+}
+
+#theme-btn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+#theme-btn i {
+  margin-right: 0.5rem;
+}
+
+/* =============================================
+                  COUNTRIES NAV
+============================================= */
+
+#country-list-nav {
+  grid-area: alias-country-list-nav;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  margin-bottom: 3rem;
+  border-radius: 5px;
+  background-color: var(--dm-clr-dark-blue);
+  box-shadow: 0px 0px 0px 5px var(--dm-box-shadow);
+}
+
+.fa-solid.fa-magnifying-glass {
+  margin-right: 2rem;
+}
+
+#search-input {
+  width: 100%;
+  outline: none;
+  border: none;
+  background: none;
+}
+
+#cancel-user-input-btn {
+  display: none;
+  background: none;
+  border: none;
+  margin-left: 1rem;
+}
+
+.filter-dropdown {
+  display: flex;
+  align-items: center;
+  width: 60%;
+  padding: 1rem 1.5rem;
+  border-radius: 5px;
+  background-color: var(--dm-clr-dark-blue);
+  box-shadow: 0px 0px 0px 5px var(--dm-box-shadow);
+  position: relative;
+}
+
+.filter-dropdown .fa-solid.fa-angle-down {
+  display: none;
+}
+
+.filter-dropdown.active .fa-solid.fa-angle-up {
+  display: none;
+}
+
+.filter-dropdown.active .fa-solid.fa-angle-down {
+  display: flex;
+}
+
+#cancel-filter-btn {
+  display: none;
+  background: none;
+  border: none;
+  margin-right: 1rem;
+}
+
+#filter-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  white-space: nowrap;
+}
+
+.filter-dropdown .region-list {
+  display: none;
+  list-style: none;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 5px;
+  background-color: var(--dm-clr-dark-blue);
+  box-shadow: 0px 0px 0px 5px var(--dm-box-shadow);
+  position: absolute;
+  z-index: 10;
+  top: 4rem;
+  left: 0;
+}
+
+.filter-dropdown.active .region-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.region-btn {
+  width: fit-content;
+  background: none;
+  border: none;
+  margin-bottom: 0.5rem;
+}
+
+/* =============================================
+                  COUNTRY LIST 
+============================================= */
+
+#country-list {
+  grid-area: alias-country-list-section;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  justify-items: center;
+  gap: 2rem;
+  padding: 0 4rem;
+  margin-bottom: 2rem;
+}
+
+.country-card {
+  display: none;
+  flex-direction: column;
+  list-style: none;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: var(--dm-clr-dark-blue);
+  box-shadow: 0px 0px 0px 5px var(--dm-box-shadow);
+  width: 100%;
+}
+
+.country-flag {
+  flex-basis: 50%;
+}
+
+.country-flag img {
+  max-width: 100%;
+}
+
+.country-details {
+  flex-basis: 50%;
+  padding: 1rem 2rem;
+  padding-bottom: 3rem;
+}
+
+.country-details h2 {
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+.country-details p {
+  white-space: nowrap;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+
+/* =============================================
+          SELECTED COUNTRY BACK BUTTON
+============================================= */
+
+.clicked-country-active * {
+  font-size: 16px;
+}
+
+.clicked-country-active {
+  grid-template-rows: repeat(3, max-content);
+  grid-template-areas:
+    "alias-header alias-header alias-header"
+    ". alias-back-btn ."
+    ". alias-country-selected-section .";
+}
+
+#back-btn {
+  grid-area: alias-back-btn;
+  width: fit-content;
+  height: fit-content;
+  background: none;
+  border: none;
+  margin: 2.5rem 2rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+  background-color: var(--dm-clr-dark-blue);
+  box-shadow: 0px 0px 0px 5px var(--dm-box-shadow);
+}
+
+.clicked-country-active #back-btn {
+  display: flex;
+  align-items: center;
+}
+
+#back-btn i {
+  margin-right: 1rem;
+}
+
+/* =============================================
+                SELECTED COUNTRY
+============================================= */
+
+#country-selected {
+  grid-area: alias-country-selected-section;
+  justify-self: center;
+  max-width: 600px;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+.clicked-country-active #country-selected {
+  display: flex;
+  flex-direction: column;
+}
+
+.country-flag-selected {
+  display: flex;
+  align-items: center;
+}
+
+.country-flag-selected img {
+  max-width: 100%;
+  box-shadow: 0px 0px 0px 5px var(--dm-box-shadow);
+}
+
+.country-details-selected {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+}
+
+#country-name-selected {
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.country-details-selected-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.country-details-1-selected p,
+.country-details-2-selected p {
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+#native-name-selected,
+#currencies-selected,
+#languages-selected {
+  display: flex;
+  flex-direction: column;
+}
+
+.country-details-2-selected {
+  margin: 2rem 0;
+}
+
+#languages-selected {
+  margin-bottom: 3rem;
+}
+
+#take-me-there-link {
+  text-decoration: none;
+  padding: 0.5rem;
+  border-radius: 5px;
+  background-color: var(--dm-clr-dark-blue);
+  box-shadow: 0px 0px 0px 5px var(--dm-box-shadow);
+  font-weight: 600;
+}
+
+.border-countries {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.border-countries h2 {
+  margin-bottom: 2rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.border-country-buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.border-country-btn {
+  width: max-content;
+  background: none;
+  border: none;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: var(--dm-clr-dark-blue);
+  box-shadow: 0px 0px 0px 5px var(--dm-box-shadow);
+}
+
+.top-btn-container {
+  grid-area: alias-top-btn-container;
+  width: 0rem;
+}
+
+#top-btn {
+  display: none;
+  position: fixed;
+  background: none;
+  border: none;
+  bottom: 0;
+  margin-left: -5rem;
+  padding: 1rem;
+  border-radius: 5px;
+  opacity: 0.5;
+  background-color: var(--dm-top-btn);
+}
+
+.top-btn-container.active #top-btn {
+  display: block;
+}
+
+/* =============================================
+              LIGHT THEME
+============================================= */
+
+.light-mode * {
+  color: var(--lm-clr-very-dark-blue);
+}
+
+.light-mode {
+  background-color: var(--lm-clr-very-light-gray);
+}
+
+.light-mode header {
+  background-color: var(--lm-clr-white);
+  box-shadow: 0px 5px 0px 0px var(--lm-box-shadow);
+}
+
+.light-mode .search-bar,
+.light-mode .filter-dropdown,
+.light-mode .filter-dropdown .region-list,
+.light-mode .country-card,
+.light-mode #back-btn,
+.light-mode .border-country-btn,
+.light-mode #take-me-there-link {
+  background-color: var(--lm-clr-white);
+  box-shadow: 0px 0px 0px 5px var(--lm-box-shadow);
+}
+
+.light-mode #top-btn {
+  background-color: var(--lm-top-btn);
+}
+
+/* =============================================
+              ACTIVE STATES
+============================================= */
+
+#theme-btn:hover,
+#cancel-user-input-btn:hover,
+#cancel-filter-btn:hover,
+#filter-btn:hover,
+.region-btn:hover,
+#search-input:hover,
+.country-card:hover,
+#back-btn:hover,
+#take-me-there-link:hover,
+.border-country-btn:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+#top-btn:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+/* =============================================
+                ANIMATIONS
+============================================= */
+
+@keyframes card-comein {
+  from {
+    transform: translateY(200px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.country-card {
+  animation-name: card-comein;
+  animation-duration: 0.3s;
+}
+
+@keyframes region-box-comein {
+  from {
+    max-height: 0px;
+  }
+  to {
+    max-height: 151px;
+  }
+}
+
+.filter-dropdown.active .region-list {
+  animation-name: region-box-comein;
+  animation-duration: 0.1s;
+}
+
+/* =============================================
+              MEDIA QUERIES
+============================================= */
+
+@media (min-width: 768px) {
+  body {
+    grid-template-columns: 1fr minmax(767px, 1200px) 1fr;
+  }
+
+  /* =============================================
+                        HEADER
+  ============================================= */
+
+  header {
+    grid-template-columns: 1fr minmax(767px, 1200px) 1fr;
+  }
+
+  /* =============================================
+                    COUNTRIES NAV
+  ============================================= */
+
+  #country-list-nav {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .search-bar {
+    margin: 0;
+    width: 45%;
+  }
+
+  .filter-dropdown {
+    width: 30%;
+  }
+
+  /* =============================================
+                    COUNTRY LIST 
+  ============================================= */
+
+  #country-list {
+    gap: 3.5rem;
+    padding: 0 1rem;
+  }
+
+  .country-card {
+    max-width: 260px;
+  }
+
+  /* =============================================
+          SELECTED COUNTRY BACK BUTTON
+  ============================================= */
+
+  #back-btn {
+    padding: 0.5rem 2.5rem;
+  }
+
+  /* =============================================
+                  SELECTED COUNTRY
+  ============================================= */
+
+  #country-selected {
+    justify-self: start;
+  }
+
+  .clicked-country-active #country-selected {
+    max-width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .country-flag-selected {
+    flex-basis: 47%;
+  }
+
+  .country-flag-selected img {
+    box-shadow: 0px 0px 0px 10px var(--dm-box-shadow);
+  }
+
+  .country-details-selected {
+    flex-basis: 47%;
+  }
+
+  .country-details-selected-content {
+    flex-direction: row;
+  }
+
+  .country-details-2-selected {
+    margin: 0;
+    margin-left: 3rem;
+  }
+
+  .border-countries {
+    flex-direction: row;
+    margin-top: 4rem;
+  }
+
+  .border-countries h2 {
+    align-self: center;
+    white-space: nowrap;
+    margin-bottom: 1rem;
+    margin-right: 2rem;
+  }
+
+  /* =============================================
+                    LIGHT THEME
+  ============================================= */
+
+  .light-mode .country-flag-selected img {
+    box-shadow: 0px 0px 0px 10px var(--lm-box-shadow);
+  }
+}

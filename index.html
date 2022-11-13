@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+
+    <title>Rest Countries Api</title>
+    <script src="https://kit.fontawesome.com/f05f45c737.js" crossorigin="anonymous"></script>
+  </head>
+  <!-- clicked-country-active -->
+  <body class="">
+    <header>
+      <div class="header-content">
+        <h1>Where in the world?</h1>
+        <button id="theme-btn"><i class="fa-solid fa-moon"></i> <i class="fa-regular fa-moon"></i>Dark Mode</button>
+      </div>
+    </header>
+
+    <nav id="country-list-nav">
+      <div class="search-bar">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" name="search-input" id="search-input" placeholder="Search for a country..." maxlength="75" />
+        <button id="cancel-user-input-btn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <!-- active class is added to filter-dropdown -->
+      <div class="filter-dropdown">
+        <button id="cancel-filter-btn"><i class="fa-solid fa-xmark"></i></button>
+        <button id="filter-btn"><span id="filter-btn-text">Filter by Region</span><i class="fa-solid fa-angle-down"></i> <i class="fa-solid fa-angle-up"></i></button>
+        <ul class="region-list">
+          <li><button class="region-btn">Africa</button></li>
+          <li><button class="region-btn">America</button></li>
+          <li><button class="region-btn">Asia</button></li>
+          <li><button class="region-btn">Europe</button></li>
+          <li><button class="region-btn">Oceania</button></li>
+        </ul>
+      </div>
+    </nav>
+
+    <ul id="country-list">
+      <!-- <div class="country-card">
+        <div class="country-flag">
+          <img src="https://flagcdn.com/bb.svg" alt="country-flag" />
+        </div>
+        <div class="country-details">
+          <h2 id="country-name">Germany</h2>
+          <p>Population: <span id="country-population">999,999,999</span></p>
+          <p>Region: <span id="country-region">Europe</span></p>
+          <p>Capital: <span id="country-capital">Berlin</span></p>
+        </div>
+      </div> -->
+      <!-- <div class="country-card">
+        <div class="country-flag">
+          <img src="https://flagcdn.com/bb.svg" alt="country-flag" />
+        </div>
+        <div class="country-details">
+          <h2 id="country-name">Country Name</h2>
+          <p>Population: <span id="country-population">999,999,999</span></p>
+          <p>Region: <span id="country-region">Region Name</span></p>
+          <p>Capital: <span id="country-capital">Capital Name</span></p>
+        </div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">
+          <img src="https://flagcdn.com/bb.svg" alt="country-flag" />
+        </div>
+        <div class="country-details">
+          <h2 id="country-name">Country Name</h2>
+          <p>Population: <span id="country-population">999,999,999</span></p>
+          <p>Region: <span id="country-region">Region Name</span></p>
+          <p>Capital: <span id="country-capital">Capital Name</span></p>
+        </div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">
+          <img src="https://flagcdn.com/bb.svg" alt="country-flag" />
+        </div>
+        <div class="country-details">
+          <h2 id="country-name">Country Name</h2>
+          <p>Population: <span id="country-population">999,999,999</span></p>
+          <p>Region: <span id="country-region">Region Name</span></p>
+          <p>Capital: <span id="country-capital">Capital Name</span></p>
+        </div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">
+          <img src="https://flagcdn.com/bb.svg" alt="country-flag" />
+        </div>
+        <div class="country-details">
+          <h2 id="country-name">Country Name</h2>
+          <p>Population: <span id="country-population">999,999,999</span></p>
+          <p>Region: <span id="country-region">Region Name</span></p>
+          <p>Capital: <span id="country-capital">Capital Name</span></p>
+        </div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">
+          <img src="https://flagcdn.com/bb.svg" alt="country-flag" />
+        </div>
+        <div class="country-details">
+          <h2 id="country-name">Country Name</h2>
+          <p>Population: <span id="country-population">999,999,999</span></p>
+          <p>Region: <span id="country-region">Region Name</span></p>
+          <p>Capital: <span id="country-capital">Capital Name</span></p>
+        </div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">
+          <img src="https://flagcdn.com/bb.svg" alt="country-flag" />
+        </div>
+        <div class="country-details">
+          <h2 id="country-name">Country Name</h2>
+          <p>Population: <span id="country-population">999,999,999</span></p>
+          <p>Region: <span id="country-region">Region Name</span></p>
+          <p>Capital: <span id="country-capital">Capital Name</span></p>
+        </div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">
+          <img src="https://flagcdn.com/bb.svg" alt="country-flag" />
+        </div>
+        <div class="country-details">
+          <h2 id="country-name">Country Name</h2>
+          <p>Population: <span id="country-population">999,999,999</span></p>
+          <p>Region: <span id="country-region">Region Name</span></p>
+          <p>Capital: <span id="country-capital">Capital Name</span></p>
+        </div>
+      </div> -->
+    </ul>
+
+    <button id="back-btn"><i class="fa-solid fa-arrow-left"></i>Back</button>
+
+    <section id="country-selected">
+      <!-- <div class="country-flag-selected">
+        <img src="https://flagcdn.com/bb.svg" alt="country-flag" />
+      </div>
+      <div class="country-details-selected">
+        
+        <h1 id="country-name-selected">Belgium</h1>
+        <div class="country-details-selected-content">
+          <div class="country-details-1-selected">
+            <p>Native Name: <span id="native-name-selected">Belgie</span></p>
+            <p>Population: <span id="country-population-selected">999,999,999</span></p>
+            <p>Region: <span id="country-region-selected">Europe</span></p>
+            <p>Sub Region: <span id="sub-region-selected">Western Europe</span></p>
+            <p>Capital: <span id="country-capital-selected">Brussels</span></p>
+          </div>
+          <div class="country-details-2-selected">
+            <p>Top Level Domain: <span id="top-level-domain-selected">.be</span></p>
+            <p>Currencies: <span id="currencies-selected">Euro</span></p>
+            <p>Languages: <span id="languages-selected">Dutch, French, German</span></p>
+          </div>
+        </div>
+        <div class="border-countries">
+          <h2>Border Countries:</h2>
+          <div class="border-country-buttons-container">
+            <button class="border-country-btn">France</button>
+            <button class="border-country-btn">Germany</button>
+            <button class="border-country-btn">Netherlands</button>
+            <button class="border-country-btn">France</button>
+            <button class="border-country-btn">Germany</button>
+            <button class="border-country-btn">Netherlands</button>
+          </div>
+        </div>
+      </div> -->
+    </section>
+    <div class="top-btn-container">
+      <button id="top-btn"><i class="fa-solid fa-angle-up"></i></button>
+    </div>
+    <script src="./main.js"></script>
+  </body>
+</html>
