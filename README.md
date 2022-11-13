@@ -39,8 +39,8 @@ Users are able to:
 
 ### Links
 
-- Live Site URL: [netlify]()
-- Live Site URL: [gh-pages]()
+- Live Site URL: [netlify](https://luxury-malabi-0cf965.netlify.app/)
+- Live Site URL: [gh-pages](https://mapokes.github.io/Rest-Countries-Api/)
 
 ## My process
 
