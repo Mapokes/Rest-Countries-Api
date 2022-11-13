@@ -12,8 +12,6 @@ This is a solution by Mapokes to the [REST Countries API with color theme switch
   - [Built with](#built-with)
 - [Author](#author)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
-
 ## Overview
 
 ### The challenge
