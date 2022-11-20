@@ -298,157 +298,162 @@ function renderFlagCards() {
 
     // creates selected (clicked) country elements, including clicked border country
     countryCard.addEventListener("click", () => {
-      // toggles off display of box with region buttons if it was opened
-      if (filterDropdown.classList.contains("active")) filterButton.click();
+      try {
+        // toggles off display of box with region buttons if it was opened
+        if (filterDropdown.classList.contains("active")) filterButton.click();
 
-      // when country card is clicked adds "clicked-country-active" class to body
-      // and removes class "active" from "bring me to top" button
-      siteBody.classList.add("clicked-country-active");
-      topBtnContainer.classList.remove("active");
+        // when country card is clicked adds "clicked-country-active" class to body
+        // and removes class "active" from "bring me to top" button
+        siteBody.classList.add("clicked-country-active");
+        topBtnContainer.classList.remove("active");
 
-      const countryFlagSelected = document.createElement("div");
-      const countryDetailsSelected = document.createElement("div");
-      const countryNameSelected = document.createElement("h1");
-      const countryDetailsSelectedContent = document.createElement("div");
-      const countryDetails1Selected = document.createElement("div");
-      const nativeNameTxt = document.createElement("p");
-      const subRegionTxt = document.createElement("p");
-      const subRegion = document.createElement("span");
-      const countryDetails2Selected = document.createElement("div");
-      const topLevelDomainTxt = document.createElement("p");
-      const topLevelDomain = document.createElement("span");
-      const currenciesTxt = document.createElement("p");
-      const languagesTxt = document.createElement("p");
-      const takeMeThereLink = document.createElement("a");
-      const borderCountries = document.createElement("div");
-      const borderCountriesTxt = document.createElement("h2");
-      const borderCountryButtonsContainer = document.createElement("div");
+        const countryFlagSelected = document.createElement("div");
+        const countryDetailsSelected = document.createElement("div");
+        const countryNameSelected = document.createElement("h1");
+        const countryDetailsSelectedContent = document.createElement("div");
+        const countryDetails1Selected = document.createElement("div");
+        const nativeNameTxt = document.createElement("p");
+        const subRegionTxt = document.createElement("p");
+        const subRegion = document.createElement("span");
+        const countryDetails2Selected = document.createElement("div");
+        const topLevelDomainTxt = document.createElement("p");
+        const topLevelDomain = document.createElement("span");
+        const currenciesTxt = document.createElement("p");
+        const languagesTxt = document.createElement("p");
+        const takeMeThereLink = document.createElement("a");
+        const borderCountries = document.createElement("div");
+        const borderCountriesTxt = document.createElement("h2");
+        const borderCountryButtonsContainer = document.createElement("div");
 
-      let selectedCountryFlag = countryFlagImage.cloneNode(true);
-      let selectedCountryPopulation = countryPopulationTxt.cloneNode(true);
-      let selectedCountryRegion = countryRegionTxt.cloneNode(true);
-      let selectedCountryCapital = countryCapitalTxt.cloneNode(true);
+        let selectedCountryFlag = countryFlagImage.cloneNode(true);
+        let selectedCountryPopulation = countryPopulationTxt.cloneNode(true);
+        let selectedCountryRegion = countryRegionTxt.cloneNode(true);
+        let selectedCountryCapital = countryCapitalTxt.cloneNode(true);
 
-      countryFlagSelected.classList.add("country-flag-selected");
+        countryFlagSelected.classList.add("country-flag-selected");
 
-      countryDetailsSelected.classList.add("country-details-selected");
+        countryDetailsSelected.classList.add("country-details-selected");
 
-      countryNameSelected.id = "country-name-selected";
-      countryNameSelected.textContent = countryName.textContent;
+        countryNameSelected.id = "country-name-selected";
+        countryNameSelected.textContent = countryName.textContent;
 
-      countryDetailsSelectedContent.classList.add("country-details-selected-content");
+        countryDetailsSelectedContent.classList.add("country-details-selected-content");
 
-      countryDetails1Selected.classList.add("country-details-1-selected");
+        countryDetails1Selected.classList.add("country-details-1-selected");
 
-      nativeNameTxt.id = "native-name-selected";
-      nativeNameTxt.textContent = "Native Name: ";
-      for (const property in country.name.nativeName) {
-        const nativeName = document.createElement("span");
-        nativeName.textContent = `${property}: ${country.name.nativeName[property].official}`;
-        nativeNameTxt.appendChild(nativeName);
-      }
+        nativeNameTxt.id = "native-name-selected";
+        nativeNameTxt.textContent = "Native Name: ";
+        for (const property in country.name.nativeName) {
+          const nativeName = document.createElement("span");
+          nativeName.textContent = `${property}: ${country.name.nativeName[property].official}`;
+          nativeNameTxt.appendChild(nativeName);
+        }
 
-      subRegionTxt.textContent = "Sub Region: ";
-      subRegion.textContent = country.subregion;
+        subRegionTxt.textContent = "Sub Region: ";
+        subRegion.textContent = country.subregion;
 
-      countryDetails2Selected.classList.add("country-details-2-selected");
+        countryDetails2Selected.classList.add("country-details-2-selected");
 
-      topLevelDomainTxt.textContent = "Top Level Domain: ";
-      topLevelDomain.textContent = country.tld[0];
+        topLevelDomainTxt.textContent = "Top Level Domain: ";
+        topLevelDomain.textContent = country.tld[0];
 
-      currenciesTxt.id = "currencies-selected";
-      currenciesTxt.textContent = "Currencies: ";
-      for (const property in country.currencies) {
-        const currencies = document.createElement("span");
-        currencies.textContent = `${property}: ${country.currencies[property].name} (${country.currencies[property].symbol})`;
-        currenciesTxt.appendChild(currencies);
-      }
+        currenciesTxt.id = "currencies-selected";
+        currenciesTxt.textContent = "Currencies: ";
+        for (const property in country.currencies) {
+          const currencies = document.createElement("span");
+          currencies.textContent = `${property}: ${country.currencies[property].name} (${country.currencies[property].symbol})`;
+          currenciesTxt.appendChild(currencies);
+        }
 
-      languagesTxt.id = "languages-selected";
-      languagesTxt.textContent = "Languages: ";
-      for (const property in country.languages) {
-        const languages = document.createElement("span");
-        languages.textContent = `${property}: ${country.languages[property]}`;
-        languagesTxt.appendChild(languages);
-      }
+        languagesTxt.id = "languages-selected";
+        languagesTxt.textContent = "Languages: ";
+        for (const property in country.languages) {
+          const languages = document.createElement("span");
+          languages.textContent = `${property}: ${country.languages[property]}`;
+          languagesTxt.appendChild(languages);
+        }
 
-      takeMeThereLink.id = "take-me-there-link";
-      takeMeThereLink.textContent = "Take me there...";
-      takeMeThereLink.href = country.maps.googleMaps;
-      takeMeThereLink.target = "_blank";
+        takeMeThereLink.id = "take-me-there-link";
+        takeMeThereLink.textContent = "Take me there...";
+        takeMeThereLink.href = country.maps.googleMaps;
+        takeMeThereLink.target = "_blank";
 
-      borderCountries.classList.add("border-countries");
-      borderCountryButtonsContainer.classList.add("border-country-buttons-container");
+        borderCountries.classList.add("border-countries");
+        borderCountryButtonsContainer.classList.add("border-country-buttons-container");
 
-      let nameOfSelectedCountryBorderName = "";
-      let borderCountryBtnId = "";
-      if (country.borders) {
-        borderCountriesTxt.textContent = "Border Countries:";
+        let nameOfSelectedCountryBorderName = "";
+        let borderCountryBtnId = "";
+        if (country.borders) {
+          borderCountriesTxt.textContent = "Border Countries:";
 
-        // ================================
-        // COUNTRY BORDER BUTTONS
-        // ================================
+          // ================================
+          // COUNTRY BORDER BUTTONS
+          // ================================
 
-        // creates selected country from clicked border
-        country.borders.forEach((countryBorder) => {
-          const borderCountryBtn = document.createElement("button");
-          borderCountryBtn.classList.add("border-country-btn");
+          // creates selected country from clicked border
+          country.borders.forEach((countryBorder) => {
+            const borderCountryBtn = document.createElement("button");
+            borderCountryBtn.classList.add("border-country-btn");
 
-          getFullBorderCountryName(countryBorder);
+            getFullBorderCountryName(countryBorder);
 
-          borderCountryBtn.id = borderCountryBtnId;
-          borderCountryBtn.textContent = nameOfSelectedCountryBorderName;
+            borderCountryBtn.id = borderCountryBtnId;
+            borderCountryBtn.textContent = nameOfSelectedCountryBorderName;
 
-          borderCountryButtonsContainer.appendChild(borderCountryBtn);
+            borderCountryButtonsContainer.appendChild(borderCountryBtn);
 
-          borderCountryBtn.addEventListener("click", () => {
-            countryCardList.forEach((countryCard) => {
-              if (countryCard.id == borderCountryBtn.id) {
-                siteReset();
-                countryCard.click();
-              }
-            });
-          });
-
-          /** country.borders has only cca3 names and this function looks for appropriate full official name of country */
-          function getFullBorderCountryName(selectedCountryBorder) {
-            countryData.forEach((country) => {
-              if (country.cca3 == selectedCountryBorder) {
-                nameOfSelectedCountryBorderName = country.name.official;
-                borderCountryBtnId = country.name.official.toLowerCase();
-
-                if (borderCountryBtnId.includes(" ")) {
-                  borderCountryBtnId = borderCountryBtnId.replaceAll(" ", "-");
+            borderCountryBtn.addEventListener("click", () => {
+              countryCardList.forEach((countryCard) => {
+                if (countryCard.id == borderCountryBtn.id) {
+                  siteReset();
+                  countryCard.click();
                 }
-              }
+              });
             });
-          }
-        });
-      } else {
-        borderCountriesTxt.textContent = "Border Countries: None";
-      }
 
-      countryFlagSelected.appendChild(selectedCountryFlag);
-      subRegionTxt.appendChild(subRegion);
-      topLevelDomainTxt.appendChild(topLevelDomain);
-      countryDetails1Selected.appendChild(nativeNameTxt);
-      countryDetails1Selected.appendChild(selectedCountryPopulation);
-      countryDetails1Selected.appendChild(selectedCountryRegion);
-      countryDetails1Selected.appendChild(subRegionTxt);
-      countryDetails1Selected.appendChild(selectedCountryCapital);
-      countryDetails2Selected.appendChild(topLevelDomainTxt);
-      countryDetails2Selected.appendChild(currenciesTxt);
-      countryDetails2Selected.appendChild(languagesTxt);
-      countryDetails2Selected.appendChild(takeMeThereLink);
-      countryDetailsSelectedContent.appendChild(countryDetails1Selected);
-      countryDetailsSelectedContent.appendChild(countryDetails2Selected);
-      borderCountries.appendChild(borderCountriesTxt);
-      borderCountries.appendChild(borderCountryButtonsContainer);
-      countryDetailsSelected.appendChild(countryNameSelected);
-      countryDetailsSelected.appendChild(countryDetailsSelectedContent);
-      countryDetailsSelected.appendChild(borderCountries);
-      countrySelected.appendChild(countryFlagSelected);
-      countrySelected.appendChild(countryDetailsSelected);
+            /** country.borders has only cca3 names and this function looks for appropriate full official name of country */
+            function getFullBorderCountryName(selectedCountryBorder) {
+              countryData.forEach((country) => {
+                if (country.cca3 == selectedCountryBorder) {
+                  nameOfSelectedCountryBorderName = country.name.official;
+                  borderCountryBtnId = country.name.official.toLowerCase();
+
+                  if (borderCountryBtnId.includes(" ")) {
+                    borderCountryBtnId = borderCountryBtnId.replaceAll(" ", "-");
+                  }
+                }
+              });
+            }
+          });
+        } else {
+          borderCountriesTxt.textContent = "Border Countries: None";
+        }
+
+        countryFlagSelected.appendChild(selectedCountryFlag);
+        subRegionTxt.appendChild(subRegion);
+        topLevelDomainTxt.appendChild(topLevelDomain);
+        countryDetails1Selected.appendChild(nativeNameTxt);
+        countryDetails1Selected.appendChild(selectedCountryPopulation);
+        countryDetails1Selected.appendChild(selectedCountryRegion);
+        countryDetails1Selected.appendChild(subRegionTxt);
+        countryDetails1Selected.appendChild(selectedCountryCapital);
+        countryDetails2Selected.appendChild(topLevelDomainTxt);
+        countryDetails2Selected.appendChild(currenciesTxt);
+        countryDetails2Selected.appendChild(languagesTxt);
+        countryDetails2Selected.appendChild(takeMeThereLink);
+        countryDetailsSelectedContent.appendChild(countryDetails1Selected);
+        countryDetailsSelectedContent.appendChild(countryDetails2Selected);
+        borderCountries.appendChild(borderCountriesTxt);
+        borderCountries.appendChild(borderCountryButtonsContainer);
+        countryDetailsSelected.appendChild(countryNameSelected);
+        countryDetailsSelected.appendChild(countryDetailsSelectedContent);
+        countryDetailsSelected.appendChild(borderCountries);
+        countrySelected.appendChild(countryFlagSelected);
+        countrySelected.appendChild(countryDetailsSelected);
+      } catch (error) {
+        // catches error, due to lack of country code of clicked country
+        alert("Country code tld doesn't exist");
+      }
     });
   });
 }
