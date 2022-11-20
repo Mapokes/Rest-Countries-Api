@@ -531,6 +531,11 @@ window.addEventListener("scroll", () => {
       stopper = true;
       showCards();
     }
+
+    // blocks flags from showing up which aren't currently searched
+    if (searchInput.value != "") {
+      userInputTextFilter();
+    }
   }
 });
 
